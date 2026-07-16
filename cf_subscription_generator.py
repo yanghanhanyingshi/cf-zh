@@ -12,7 +12,7 @@ from datetime import datetime
 from urllib.parse import quote
 
 # 配置参数
-GITHUB_URL = "https://raw.githubusercontent.com/yanghanhanyingshi/cf-linglu/refs/heads/main/vps789-100.txt"
+GITHUB_URL = "https://8888888888888888.88888888888888888888888888888888888.ccwu.cc"
 UUID = "4c0b7280-76bb-495c-9c8b-f05712ebf805"
 OUTPUT_FILE = "cf_subscription.txt"
 

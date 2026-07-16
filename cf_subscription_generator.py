@@ -8,7 +8,6 @@ GitHub IP 爬虫 - 自动生成 V2RayN 订阅
 import requests
 import base64
 import time
-import schedule
 from datetime import datetime
 from urllib.parse import quote
 
@@ -169,6 +168,7 @@ if __name__ == "__main__":
         print("单次运行模式（GitHub Actions）")
         job()
     else:
+        import schedule
         print("执行频率：每 12 小时一次")
         
         # 立即执行一次

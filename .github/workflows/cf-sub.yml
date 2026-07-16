@@ -1,0 +1,35 @@
+name: CF Subscription Generator
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # 每12小时执行一次
+  workflow_dispatch:        # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate subscription
+        run: python cf_subscription_generator.py --once
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cf_subscription.txt
+          git diff --staged --quiet || git commit -m "Auto update: $(date '+%Y-%m-%d %H:%M:%S') UTC"
+          git push

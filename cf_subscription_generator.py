@@ -12,7 +12,8 @@ from datetime import datetime
 from urllib.parse import quote
 
 # 配置参数
-GITHUB_URL = "https://8888888888888888.88888888888888888888888888888888888.ccwu.cc"
+GITHUB_URL = "https://raw.githubusercontent.com/yanghanhanyingshi/cf-linglu/refs/heads/main/vps789-100.txt"
+WORKER_DOMAIN = "8888888888888888.88888888888888888888888888888888888.ccwu.cc"
 UUID = "4c0b7280-76bb-495c-9c8b-f05712ebf805"
 OUTPUT_FILE = "cf_subscription.txt"
 
@@ -87,17 +88,18 @@ def generate_vless_link(node_info):
     encoded_name = quote(name, safe='')
     
     # 构建 VLESS 链接
+    # address = 优选域名（连接入口），sni/host = Worker 域名（路由到后端）
     vless_link = (
         f"vless://{UUID}@{domain}:{port}?"
         f"encryption={VLESS_PARAMS['encryption']}&"
         f"security={VLESS_PARAMS['security']}&"
-        f"sni={domain}&"
+        f"sni={WORKER_DOMAIN}&"
         f"fp={VLESS_PARAMS['fp']}&"
         f"insecure={VLESS_PARAMS['insecure']}&"
         f"allowInsecure={VLESS_PARAMS['allowInsecure']}&"
         f"ech={VLESS_PARAMS['ech']}&"
         f"type={VLESS_PARAMS['type']}&"
-        f"host={domain}&"
+        f"host={WORKER_DOMAIN}&"
         f"path={VLESS_PARAMS['path']}"
         f"#{encoded_name}"
     )
